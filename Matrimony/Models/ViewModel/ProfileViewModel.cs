@@ -4,6 +4,7 @@ namespace Matrimony.Models.ViewModel
 {
     public class ProfileViewModel
     {
+
         public int? ProfileId { get; set; }
 
         public int? UserId { get; set; }
