@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Matrimony.Model;
+namespace Matrimony.Models;
 
 public partial class Profile
 {

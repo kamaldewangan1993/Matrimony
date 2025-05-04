@@ -1,4 +1,6 @@
-using Matrimony.Model;
+using Matrimony.Business.Implementation;
+using Matrimony.Business.Interface;
+using Matrimony.Models;
 using Microsoft.EntityFrameworkCore;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -18,11 +20,15 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
+
 builder.Services.AddControllers();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MatrimonyContext>(options =>
                 options.UseSqlServer().EnableSensitiveDataLogging());
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

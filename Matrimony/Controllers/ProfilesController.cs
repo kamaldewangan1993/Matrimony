@@ -1,5 +1,5 @@
-﻿using Matrimony.Model;
-using Microsoft.AspNetCore.Http;
+﻿using Matrimony.Business.Interface;
+using Matrimony.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matrimony.Controllers
@@ -8,18 +8,40 @@ namespace Matrimony.Controllers
     [Route("[controller]")]
     public class ProfilesController : Controller
     {
-        private readonly MatrimonyContext _matrimonyContext;
-        public ProfilesController(MatrimonyContext matrimonyContext)
+        private readonly IProfileService _profileService;
+        public ProfilesController(IProfileService profileService)
         {
-            _matrimonyContext = matrimonyContext;
+            _profileService = profileService;
         }
 
         // GET: ProfilesController
         [HttpGet(Name = "Index")]
         public ActionResult Index()
         {
-            List<Profile> profiles = _matrimonyContext.Profiles.ToList();
+            List<ProfileViewModel> profiles = _profileService.GetProfiles();
             return Ok(profiles);
+        }
+
+        [HttpPost(Name = "Create")]
+        public ActionResult Create(ProfileViewModel profileViewModel)
+        {
+            int? result = _profileService.CreateProfile(profileViewModel);
+            return Ok(result);
+        }
+
+        [HttpPut(Name = "Edit")]
+        public ActionResult Edit(ProfileViewModel profileViewModel)
+        {
+
+            int? result = _profileService.EditProfile(profileViewModel);
+            return Ok(result);
+        }
+
+        [HttpDelete(Name = "Delete")]
+        public ActionResult Delete(int? id)
+        {
+            int? result = _profileService.DeleteProfile(id);
+            return Ok(result);
         }
     }
 }

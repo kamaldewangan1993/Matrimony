@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Matrimony.Model;
+namespace Matrimony.Models;
 
 public partial class MatrimonyContext : DbContext
 {
@@ -54,7 +54,6 @@ public partial class MatrimonyContext : DbContext
         {
             entity.ToTable("Profile");
 
-            entity.Property(e => e.ProfileId).ValueGeneratedNever();
             entity.Property(e => e.AboutMyFamily)
                 .HasMaxLength(200)
                 .IsUnicode(false);
