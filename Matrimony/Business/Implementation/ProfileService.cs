@@ -15,6 +15,7 @@ namespace Matrimony.Business.Implementation
 
         public List<ProfileViewModel> GetProfiles()
         {
+            throw new NotImplementedException();
             List<Profile> profiles = _mContext.Profiles.ToList();
             List<ProfileViewModel> profileViewModels = new List<ProfileViewModel>();
             foreach (Profile profile in profiles)

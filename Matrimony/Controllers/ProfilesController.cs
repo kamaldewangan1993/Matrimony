@@ -18,6 +18,7 @@ namespace Matrimony.Controllers
         [HttpGet(Name = "Index")]
         public ActionResult Index()
         {
+            
             List<ProfileViewModel> profiles = _profileService.GetProfiles();
             return Ok(profiles);
         }

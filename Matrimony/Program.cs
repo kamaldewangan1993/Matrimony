@@ -1,11 +1,20 @@
 using Matrimony.Business.Implementation;
 using Matrimony.Business.Interface;
+using Matrimony.Middlewares;
 using Matrimony.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Error()
+        .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)  // Logs are written to 'logs/log.txt'
+        .CreateLogger();
+
+builder.Host.UseSerilog(); // Use Serilog for logging
 
 builder.Services.AddCors(options =>
 {
@@ -19,7 +28,6 @@ builder.Services.AddCors(options =>
 });
 
 // Add services to the container.
-
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
@@ -47,6 +55,8 @@ app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
