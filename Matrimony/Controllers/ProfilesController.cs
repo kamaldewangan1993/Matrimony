@@ -44,5 +44,12 @@ namespace Matrimony.Controllers
             int? result = _profileService.DeleteProfile(id);
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("Demo")]
+        public ActionResult Demo()
+        {
+            return Ok("Azure Deployment working successfully");
+        }
     }
 }
